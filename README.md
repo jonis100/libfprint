@@ -1,4 +1,37 @@
-
+> [!IMPORTANT]
+> **This fork is archived.** The `goodixtls55x4` driver for the Goodix
+> **27c6:55b4** sensor (branch `55b4-experimental`) is replaced by
+> **[libfprint-goodix55b4-milan](https://github.com/TheWeirdDev/libfprint-goodix55b4-milan)**.
+> It uses Goodix's Milan matcher ported to native C instead of SIGFM, and is
+> far more reliable: 95–97% first-attempt matches with no false accepts in
+> testing.
+>
+> **Arch Linux:** install
+> [`libfprint-goodix55b4`](https://aur.archlinux.org/packages/libfprint-goodix55b4)
+> from the AUR. The old `libfprint-goodixtls-55x4` AUR package now installs it
+> for you.
+>
+> ```
+> yay -S libfprint-goodix55b4
+> sudo systemctl restart fprintd
+> fprintd-enroll
+> ```
+>
+> **Other distributions:** there is no package yet. See the
+> [new repository](https://github.com/TheWeirdDev/libfprint-goodix55b4-milan):
+> `scripts/integrate.py` adds the driver to a libfprint source tree.
+>
+> **Moving over from this driver:**
+> - Prints enrolled with this driver don't work with the new one. Re-enroll
+>   with `fprintd-enroll`.
+> - A sensor already flashed with
+>   [goodix-fp-dump](https://github.com/mpi3d/goodix-fp-dump) needs nothing
+>   else: it has the firmware (`GF3268_RTSEC_APP_10041`) and the zero key the
+>   new driver expects. Otherwise, follow the
+>   [provisioning steps](https://github.com/TheWeirdDev/libfprint-goodix55b4-milan#sensor-provisioning-one-time).
+> - Other `GF3268_RTSEC_APP_` firmware (e.g. `10056`) passes the new driver's
+>   firmware check but is untested.
+> - The 55a4 was never supported by this driver and isn't by the new one.
 
 <div align="center">
 
