@@ -27,7 +27,6 @@
 #include "opencv2/features2d.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include <algorithm>
-#include <cstdio>
 #include <filesystem>
 #include <fstream>
 #include <iterator>
@@ -75,7 +74,7 @@ struct match {
     bool operator<(const match& right) const
     {
         return (this->p1.y < right.p1.y) ||
-               ((this->p1.y < right.p1.y) && this->p1.x < right.p1.x);
+               ((this->p1.y == right.p1.y) && this->p1.x < right.p1.x);
     }
 };
 struct angle {

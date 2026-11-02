@@ -41,15 +41,11 @@
 static GError *
 err_from_ssl (void)
 {
-  GError *err = malloc (sizeof (GError));
   unsigned long code = ERR_get_error ();
-
-  err->code = code;
   const char *msg = ERR_reason_error_string (code);
 
-  err->message = malloc (strlen (msg));
-  strcpy (err->message, msg);
-  return err;
+  return g_error_new_literal (G_IO_ERROR, G_IO_ERROR_FAILED,
+                              msg ? msg : "Unknown TLS error");
 }
 
 static unsigned int

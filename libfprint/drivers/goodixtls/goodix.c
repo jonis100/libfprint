@@ -1609,6 +1609,7 @@ goodix_tls_ready_image_handler (FpDevice *dev, guint8 *data,
 
   if (read_size <= 0)
     {
+      free (buff);
       callback (dev, NULL, 0, cb_info->user_data, err);
       g_free (cb_info);
       return;
